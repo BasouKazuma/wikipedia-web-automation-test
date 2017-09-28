@@ -1,0 +1,17 @@
+target/*
+
+# Mac
+.DS_Store
+
+# Gauge
+.gauge
+logs
+gauge_bin
+reports
+
+# IntelliJ
+.idea/*
+
+# Web Drivers
+drivers/*
+!drivers/place_drivers_here
