@@ -2,8 +2,11 @@ package pages;
 
 import com.thoughtworks.gauge.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
     
@@ -28,12 +31,15 @@ public class HomePage extends BasePage {
     @Step("Navigate to the homepage")
     public void navigateTo() {
         driver.get("https://www.wikipedia.org");
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(body));
     }
 
     @Step("Verify all languages are visible")
     public void verifyLanguagesAreVisible() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(body));
+        
+        //Method 1: Find elements explicitly
         wait.until(ExpectedConditions.visibilityOfElementLocated(english));
         wait.until(ExpectedConditions.visibilityOfElementLocated(spanish));
         wait.until(ExpectedConditions.visibilityOfElementLocated(japanese));
@@ -44,10 +50,17 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(chinese));
         wait.until(ExpectedConditions.visibilityOfElementLocated(portugese));
         wait.until(ExpectedConditions.visibilityOfElementLocated(polish));
+        
+        // Method 2: Find list of elements from shared class
+        List<WebElement> elements = driver.findElements(languages);
+        wait = new WebDriverWait(driver, 10);
+        for (WebElement element : elements) {
+            wait.until(ExpectedConditions.visibilityOf(element));
+        }
     }
     
     @Step("Search for exact page <searchTerm>")
-    public void search(String searchTerm) {
+    public void exactPageSearch(String searchTerm) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchField));
         driver.findElement(searchField).sendKeys(searchTerm);

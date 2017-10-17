@@ -9,16 +9,11 @@ This project is for running automation tests against the [Wikipedia Website](htt
 * Install `Maven` ([download](http://maven.apache.org/download.cgi))
 * Install `Gauge` ([download](https://getgauge.io/get-started.html))
 * Download `Chromedriver` ([download](https://sites.google.com/a/chromium.org/chromedriver))
-
-
-## Web Driver
-
 * Move `chromedriver` to the `drivers` folder
 
 
 ### Mac
 
-* Install Homebrew ([download](https://brew.sh/))
 * Edit the `~/.bash_profile` file
 * Add the following environment variables to the file:  
 (Update each location with your local locations)
